@@ -96,7 +96,7 @@ include_directories(
   ${catkin_INCLUDE_DIRS} 
   ${catkin_SRC_DIRS} 
   /usr/local/Aria/include/
-  ../ArTerabotArm-2.8.0/include/
+  ${CMAKE_CURRENT_LIST_DIR}/../terabot_arm/terabot_arm_driver/include/
 )
 
 ## Declare a cpp library
@@ -168,12 +168,12 @@ include_directories(
 
 #the one used
 add_executable(teleoparm src/teleoparm.cpp)
-link_directories(${catkin_LIBRARIES}/usr/local/Aria/lib /home/marbm/catkin_ws_sdp/src/seekur_comp/ArTerabotArm-2.8.0/lib ${arm_control_SOURCE_DIR}/ArTerabotArm-2.8.0/lib)
-target_link_libraries(teleoparm ${catkin_LIBRARIES} /usr/local/Aria/lib/libAria.so /home/marbm/catkin_ws_sdp/src/seekur_comp/ArTerabotArm-2.8.0/lib/libArTerabotArm.so)
+link_directories(${catkin_LIBRARIES}/usr/local/Aria/lib ${CMAKE_CURRENT_LIST_DIR}/../terabot_arm/terabot_arm_driver/lib)
+target_link_libraries(teleoparm ${catkin_LIBRARIES} /usr/local/Aria/lib/libAria.so ${CMAKE_CURRENT_LIST_DIR}/../terabot_arm/terabot_arm_driver/lib/libArTerabotArm.so)
 
 add_executable(arm_test src/arm_test.cpp)
-link_directories(${catkin_LIBRARIES}/usr/local/Aria/lib /home/marbm/catkin_ws_sdp/src/seekur_comp/ArTerabotArm-2.8.0/lib ${arm_control_SOURCE_DIR}/ArTerabotArm-2.8.0/lib)
-target_link_libraries(arm_test ${catkin_LIBRARIES} /usr/local/Aria/lib/libAria.so /home/marbm/catkin_ws_sdp/src/seekur_comp/ArTerabotArm-2.8.0/lib/libArTerabotArm.so)
+link_directories(${catkin_LIBRARIES}/usr/local/Aria/lib ${CMAKE_CURRENT_LIST_DIR}/../terabot_arm/terabot_arm_driver )
+target_link_libraries(arm_test ${catkin_LIBRARIES} /usr/local/Aria/lib/libAria.so ${CMAKE_CURRENT_LIST_DIR}/../terabot_arm/terabot_arm_driver/lib/libArTerabotArm.so)
 
 #target_link_libraries(teleoparm ${catkin_LIBRARIES})
 #link_directories(${catkin_LIBRARIES}/usr/local/Aria/lib /home/marbm/catki$
