@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(arm_control)
+project(seekur_terabot_arm_control)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -172,8 +172,12 @@ link_directories(${catkin_LIBRARIES}/usr/local/Aria/lib ${CMAKE_CURRENT_LIST_DIR
 target_link_libraries(teleoparm ${catkin_LIBRARIES} /usr/local/Aria/lib/libAria.so ${CMAKE_CURRENT_LIST_DIR}/../terabot_arm/terabot_arm_driver/lib/libArTerabotArm.so)
 
 add_executable(arm_test src/arm_test.cpp)
-link_directories(${catkin_LIBRARIES}/usr/local/Aria/lib ${CMAKE_CURRENT_LIST_DIR}/../terabot_arm/terabot_arm_driver )
+link_directories(${catkin_LIBRARIES}/usr/local/Aria/lib ${CMAKE_CURRENT_LIST_DIR}/../terabot_arm/terabot_arm_driver/lib )
 target_link_libraries(arm_test ${catkin_LIBRARIES} /usr/local/Aria/lib/libAria.so ${CMAKE_CURRENT_LIST_DIR}/../terabot_arm/terabot_arm_driver/lib/libArTerabotArm.so)
+
+add_executable(test src/test.cpp)
+link_directories(${catkin_LIBRARIES}/usr/local/Aria/lib ${CMAKE_CURRENT_LIST_DIR}/../terabot_arm/terabot_arm_driver/lib )
+target_link_libraries(test ${catkin_LIBRARIES} /usr/local/Aria/lib/libAria.so ${CMAKE_CURRENT_LIST_DIR}/../terabot_arm/terabot_arm_driver/lib/libArTerabotArm.so)
 
 #target_link_libraries(teleoparm ${catkin_LIBRARIES})
 #link_directories(${catkin_LIBRARIES}/usr/local/Aria/lib /home/marbm/catki$

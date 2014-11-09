@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>arm_control</name>
+  <name>seekur_terabot_arm_control</name>
   <version>0.0.0</version>
   <description>The learningArm package</description>
 

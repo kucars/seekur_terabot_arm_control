@@ -17,6 +17,7 @@ static float forthpose [5]= {90, -40, -90, -40, 0};
 static float fifthpose [5]= {90, -50, -90, -40, 0};
 
 static float straightForward [5]= {0, -90, 0, 0, 0};
+static float start [5]= {0, 0, 0, 0, 0};
 static float pickUpFloor [5]= {0, -95, -76.5, -3.5, -0};
 static float right [5]= {45, -54.52, -69.04, -6.93, 0};
 static float left[5] = {-45, -54.52, -69.04, -6.93, 0};
@@ -94,23 +95,27 @@ int main(int argc, char **argv)
   ros::Publisher joint_pub = n.advertise<sensor_msgs::JointState>("/joint_states", 50);//50 1000
   ros::Subscriber arm_sub_ = n.subscribe<sensor_msgs::JointState>("/joint_states", 10, move_arm);//it was 100
 
+float positions[5];
 
 
 // float park1 [5]= {50, -95,-50, -149, 0};
  float park1 [5]= {149, -94, 155, -149, 0};//this is th real park
-
- // arm.moveArm(park);
-
-float positions[5];
-
+float initial [5]= {-30.0, 0.0, 0.0, 0.0, 0.0};
+arm.moveArm(start);
+//arm.moveArm(park);
+//arm.moveArm(forwardReady);
+  ArUtil::sleep(12000);
   while(ros::ok())
   {
 	joints.name.push_back("j1");
-        //joints.name.push_back("j2");
+        joints.name.push_back("j2");
+	joints.name.push_back("j3");
+        joints.name.push_back("j4");
+	joints.name.push_back("j5");
          
 	// why is there no joint 
 	//joints.position.push_back(11);//<<
-	// joints.position.clear();
+	 joints.position.clear();
          joints.position.push_back(positions[0]);
          joints.position.push_back(positions[1]);
 	 joints.position.push_back(positions[2]);
@@ -118,10 +123,11 @@ float positions[5];
          joints.position.push_back(positions[4]);
         joint_pub.publish(joints);
 	//arm.getJointStatus(&j1,&j2,&j3,&j4,&j5);
-        //arm.getArmPos(positions);
-	 //std::cout<<"j1:"<<j1<<"j2:"<<j2<<"j3:"<<j3<<"j4:"<<j4<<"j5:"<<j5<<"\n"; fflush(stdout);
-	//std::cout<<"position1:"<<positions[0]<<"position2:"<<positions[1]<<"position3:"<<positions[2]<<"position4:"<<positions[3]<<"position5:"<<positions[4]<<"\n"; fflush(stdout);
-         //ros::spinOnce();
+        arm.getArmPos(positions);
+	// std::cout<<"j1:"<<j1<<"j2:"<<j2<<"j3:"<<j3<<"j4:"<<j4<<"j5:"<<j5<<"\n"; fflush(stdout);
+	std::cout<<"position1:"<<positions[0]<<"position2:"<<positions[1]<<"position3:"<<positions[2]<<"position4:"<<positions[3]<<"position5:"<<positions[4]<<"\n"; fflush(stdout);
+        //ros::spin(); 
+        ros::spinOnce();
          loop_rate.sleep();
         // std::cout<<"loopend\n";
    }
@@ -189,9 +195,9 @@ void move_arm(const sensor_msgs::JointState::ConstPtr& j)
 			arm.moveArm(secondpose);
 			ArUtil::sleep(7000);
 			arm.moveArm(thirdpose);
-                        ArUtil::sleep(5000);
+                        ArUtil::sleep(7000);
 			arm.closeGripper();
-			ArUtil::sleep(7000);
+			ArUtil::sleep(9000);
                         arm.moveArm(forthpose);
 			ArUtil::sleep(11000);
                         arm.moveArm(fifthpose);
