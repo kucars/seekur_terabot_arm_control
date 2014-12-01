@@ -101,10 +101,25 @@ float positions[5];
 // float park1 [5]= {50, -95,-50, -149, 0};
  float park1 [5]= {149, -94, 155, -149, 0};//this is th real park
 float initial [5]= {-30.0, 0.0, 0.0, 0.0, 0.0};
-arm.moveArm(start);
-//arm.moveArm(park);
-//arm.moveArm(forwardReady);
-  ArUtil::sleep(12000);
+
+// std::cout<<"Gripper Status before:"<<arm.getGripperStatus()<<"\n";
+// std::cout<<"Gripper Status before:"<<arm.getGripperStatus()<<"\n";
+// std::cout<<"Gripper Status before:"<<arm.getGripperStatus()<<"\n";
+// std::cout<<"Gripper Status before:"<<arm.getGripperStatus()<<"\n";
+// arm.grip(-100);
+// std::cout<<"Gripper Status after:"<<arm.getGripperStatus()<<"\n";
+// std::cout<<"Gripper Status after:"<<arm.getGripperStatus()<<"\n";
+// std::cout<<"Gripper Status after:"<<arm.getGripperStatus()<<"\n";
+// std::cout<<"Gripper Status after:"<<arm.getGripperStatus()<<"\n";
+
+  //*********testing**************************
+ // arm.moveArm(start);
+  //arm.closeGripper();
+   // arm.moveArm(park1); 
+  arm.moveArm(forwardReady);// used when the manual control GUI is used
+
+  ArUtil::sleep(20000);// time for the non blocking predefined movements to take place
+  //******************************************
   while(ros::ok())
   {
 	joints.name.push_back("j1");
